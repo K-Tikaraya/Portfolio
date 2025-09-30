@@ -2,48 +2,44 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ProjectsContainer = styled.section`
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 100px 0;
-
-  @media (max-width: 768px) {
-    padding: 60px 20px;
-  }
+  padding: 8rem 4rem;
+  width: 100vw;
+  background: linear-gradient(135deg, #0b0f2a, #141936, #1b1f44);
+  color: #fff;
+  min-height: 100vh;
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 3rem;
-  color: #333;
-  position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background-color: #64ffda;
-  }
+  font-size: 2.8rem;
+  color: #ffcc66;
+  font-weight: 800;
+  margin-bottom: 4rem;
+  text-align: left;
 `;
 
 const ProjectsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 25px;
-  position: relative;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; /* single column on mobile */
+  }
 `;
 
 const ProjectCard = styled.div`
-  background: #ffffff;
+  background: #1b1f44;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 
   &:hover {
-    transform: translateY(-10px);
+    transform: scale(1.12);
+    background: #252a5c;
+    box-shadow: 0 0 20px rgba(255, 204, 102, 0.6);
   }
 `;
 
@@ -51,9 +47,10 @@ const ProjectImage = styled.div`
   width: 100%;
   height: 200px;
   background-color: #f5f5f5;
-  background-image: url(\${props => props.image});
-  background-size: cover;
+  background-image: url(${(props) => props.image});
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const ProjectContent = styled.div`
@@ -62,12 +59,12 @@ const ProjectContent = styled.div`
 
 const ProjectTitle = styled.h3`
   font-size: 1.3rem;
-  color: #333;
+  color: #9fa8da;
   margin-bottom: 10px;
 `;
 
 const ProjectDescription = styled.p`
-  color: #666;
+  color: #ddd;
   font-size: 0.9rem;
   line-height: 1.6;
   margin-bottom: 15px;
@@ -81,20 +78,15 @@ const TechStack = styled.div`
 `;
 
 const TechTag = styled.span`
-  background: #f0f0f0;
-  color: #666;
+  background: #323871ff;
+  color: #fff;
   padding: 4px 10px;
   border-radius: 15px;
   font-size: 0.8rem;
 `;
 
-const ProjectLinks = styled.div`
-  display: flex;
-  gap: 15px;
-`;
-
 const ProjectLink = styled.a`
-  color: #333;
+  color: #ffcc66;
   text-decoration: none;
   font-size: 0.9rem;
   display: flex;
@@ -113,37 +105,37 @@ const ProjectLink = styled.a`
 const ProjectsSection = () => {
   const projects = [
     {
-      title: 'E-commerce Platform',
-      description: 'A full-stack e-commerce platform with features like user authentication, product management, and payment integration.',
-      image: '/project1.jpg',
-      techStack: ['React', 'Node.js', 'MongoDB', 'Express', 'Stripe'],
-      liveLink: 'https://project1.com',
-      githubLink: 'https://github.com/yourusername/project1'
+      title: 'AlgoWatch',
+      description:
+        'Dashboard to track Codeforces activity for 30+ students, including contest history, rating graphs, solved problems, inactivity detection, reminders, and CSV export.',
+      image: '/images/project-algowatch.jpg', // replace with your screenshot
+      techStack: ['React.js', 'Node.js', 'MongoDB', 'Cron', 'Nodemailer'],
+      githubLink: 'https://github.com/K-Tikaraya/AlgoWatch',
     },
     {
-      title: 'Task Management App',
-      description: 'A responsive task management application with real-time updates and collaborative features.',
-      image: '/project2.jpg',
-      techStack: ['React', 'Firebase', 'Material-UI', 'Redux'],
-      liveLink: 'https://project2.com',
-      githubLink: 'https://github.com/yourusername/project2'
+      title: 'Expense Tracker App',
+      description:
+        'MERN-based application to track income and expenses with JWT authentication, category tracking, interactive charts, and Excel export for reporting.',
+      image: '/images/expense.png', // replace with your screenshot
+      techStack: ['MongoDB', 'React.js', 'Node.js', 'JWT', 'Tailwind CSS'],
+      githubLink: 'https://github.com/K-Tikaraya/Expense_Tracker',
     },
     {
-      title: 'Weather Dashboard',
-      description: 'A weather dashboard that displays current weather and forecasts using external API integration.',
-      image: '/project3.jpg',
-      techStack: ['JavaScript', 'OpenWeather API', 'CSS3', 'HTML5'],
-      liveLink: 'https://project3.com',
-      githubLink: 'https://github.com/yourusername/project3'
+      title: 'Code Editor',
+      description:
+        'An interactive HTML code editor featuring real-time preview, syntax highlighting, responsive design, dark/light mode, and a live coding option.',
+      image: '/images/project-codeeditor.jpg', // replace with your screenshot
+      techStack: ['HTML', 'CSS', 'JavaScript'],
+      githubLink: 'https://github.com/K-Tikaraya/CodeEditor', // replace with actual repo
     },
     {
-      title: 'Social Media Analytics',
-      description: 'A dashboard for analyzing social media metrics and generating detailed reports.',
-      image: '/project4.jpg',
-      techStack: ['Python', 'Django', 'Chart.js', 'PostgreSQL'],
-      liveLink: 'https://project4.com',
-      githubLink: 'https://github.com/yourusername/project4'
-    }
+      title: 'Color Picking Extension',
+      description:
+        'A browser extension enabling users to pick any color on the screen, view picked colors, and copy or clear them with a single click.',
+      image: '/images/project-colorpicker.jpg', // replace with your screenshot
+      techStack: ['HTML', 'CSS', 'JavaScript'],
+      githubLink: 'https://github.com/K-Tikaraya/ColorPickerExtension', // replace with actual repo
+    },
   ];
 
   return (
@@ -161,14 +153,13 @@ const ProjectsSection = () => {
                   <TechTag key={idx}>{tech}</TechTag>
                 ))}
               </TechStack>
-              <ProjectLinks>
-                <ProjectLink href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                  <i className="fab fa-github"></i> Code
-                </ProjectLink>
-                <ProjectLink href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                  <i className="fas fa-external-link-alt"></i> Demo
-                </ProjectLink>
-              </ProjectLinks>
+              <ProjectLink
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="fab fa-github"></i> Code
+              </ProjectLink>
             </ProjectContent>
           </ProjectCard>
         ))}

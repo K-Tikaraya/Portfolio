@@ -5,11 +5,11 @@ import Header from './components/Header';
 import FixedSidebar from './components/FixedSidebar';
 import AboutSection from './components/AboutSection';
 import ExperienceSection from './components/ExperienceSection';
-import EducationSection from './components/EducationSection';
 import ProjectsSection from './components/ProjectsSection';
+import Skills from './components/skills';
 
 const AppContainer = styled.div`
-  margin-left: 100px; // Space for fixed sidebar
+ 
   
   @media (max-width: 768px) {
     margin-left: 0;
@@ -17,7 +17,7 @@ const AppContainer = styled.div`
 `;
 
 const MainContent = styled.main`
-  padding: 0 20px;
+  padding: 0 0px;
 `;
 
 function App() {
@@ -28,8 +28,8 @@ function App() {
         <MainContent>
           <Header />
           <AboutSection />
+          <Skills />
           <ExperienceSection />
-          <EducationSection />
           <ProjectsSection />
         </MainContent>
       </AppContainer>

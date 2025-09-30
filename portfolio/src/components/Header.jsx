@@ -1,64 +1,127 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+// import { FaGithub, FaLinkedin, FaEnvelope, FaDownload } from "react-icons/fa";
 
 // Navbar
 const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.875rem 1.25rem;
+  padding: 1rem 2rem; /* Increased padding for a more spacious feel */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(15, 15, 35, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(11, 15, 42, 0.98); /* Slightly less transparent */
+  backdrop-filter: blur(16px); /* More blur effect */
   z-index: 1000;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.1); /* Slightly more visible border */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    padding: 1rem;
+  }
 `;
 
 const Logo = styled.a`
   color: #fff;
-  font-size: 1.3rem;
+  font-size: 1.8rem; /* Significantly larger */
   text-decoration: none;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  font-weight: 900; /* Even bolder */
+  letter-spacing: 1px; /* More distinct letter spacing */
+  transition: color 0.3s ease, transform 0.3s ease; /* Added transform transition */
+  &:hover {
+    color: #ffdb80; /* Brighter accent color on hover */
+    transform: scale(1.05); /* Subtle scale effect on hover */
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem; /* Space below logo on small screens */
+  }
 `;
 
 const NavLinks = styled.div`
   display: flex;
-  gap: 1.25rem;
+  gap: 2rem; /* Increased gap for more separation */
   align-items: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack links vertically on smaller screens */
+    gap: 0.8rem; /* Smaller gap for stacked links */
+    margin-bottom: 1rem;
+  }
 `;
 
 const NavLink = styled.a`
-  color: #ddd;
+  position: relative;
+  color: #e0e0e0; /* Slightly brighter default link color */
   text-decoration: none;
-  font-size: 0.95rem;
-  opacity: 0.85;
-  transition: color 0.2s ease, opacity 0.2s ease;
-  &:hover { color: #ffcc66; opacity: 1; }
+  font-size: 1.15rem; /* Larger font size for links */
+  font-weight: 500;
+  opacity: 0.9;
+  transition: color 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
+  padding-bottom: 0.3rem; /* More space for the underline */
+  
+  &:hover { 
+    color: #ffcc66; 
+    opacity: 1; 
+    transform: translateY(-2px); /* Lift effect on hover */
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px; /* Thicker underline */
+    background-color: #ffcc66; 
+    bottom: 0;
+    left: 50%; /* Start underline from center */
+    transform: translateX(-50%); /* Center the underline */
+    transition: width 0.3s ease-out; /* Smooth and snappier animation */
+  }
+  &:hover::after {
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    padding-bottom: 0.2rem;
+  }
 `;
 
 const DownloadButton = styled.a`
-  background: #4169e1;
+  background: #5a8aff; /* Brighter blue */
   color: #fff;
-  padding: 0.45rem 0.9rem;
-  border-radius: 6px;
+  padding: 0.6rem 1.2rem; /* More padding */
+  border-radius: 25px; /* More rounded, pill-like shape */
   text-decoration: none;
-  font-size: 0.92rem;
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  &:hover { background: #5379f6; transform: translateY(-1px); }
+  font-size: 1rem; /* Larger font size */
+  font-weight: 700; /* Bolder text */
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  border: none; /* Ensure no default border */
+
+  &:hover { 
+    background: #7caeff; /* Lighter blue on hover */
+    transform: translateY(-3px) scale(1.02); /* More pronounced lift and slight scale */
+    box-shadow: 0 8px 18px rgba(90, 138, 255, 0.6); /* Stronger glow effect */
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 1rem; /* Space above button on small screens */
+  }
 `;
 
-// Hero Section
+// Hero Section (No changes needed here for navbar enhancements)
 const HeaderContainer = styled.header`
-  padding: 8rem 2rem 2rem;
+  width: 100vw; /* make full width */
   min-height: 100vh;
+  padding: 3rem 4rem 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
+  gap: 0.3rem;
   align-items: center;
   background: linear-gradient(135deg, #0b0f2a, #141936, #1b1f44);
 
@@ -70,7 +133,7 @@ const HeaderContainer = styled.header`
 `;
 
 const TextContainer = styled.div`
-  max-width: 620px;
+  max-width: 610px;
 `;
 
 const Name = styled.h1`
@@ -99,34 +162,18 @@ const Description = styled.p`
   @media (max-width: 768px) { font-size: 0.98rem; }
 `;
 
-const Buttons = styled.div`
+const SocialIcons = styled.div`
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
   margin-top: 1rem;
   @media (max-width: 768px) { justify-content: center; }
 `;
 
-const PrimaryButton = styled.a`
-  background: #4169e1;
-  color: #fff;
-  padding: 0.65rem 1.2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: background-color 0.25s ease, transform 0.2s ease;
-  &:hover { background: #5379f6; transform: translateY(-2px); }
-`;
-
-const SecondaryButton = styled.a`
-  border: 1px solid #ffcc66;
-  color: #ffcc66;
-  padding: 0.65rem 1.2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: background-color 0.25s ease, transform 0.2s ease;
-  &:hover { background: rgba(255,204,102,0.08); transform: translateY(-2px); }
+const IconLink = styled.a`
+  color: #c7c9d9;
+  font-size: 1.4rem;
+  transition: color 0.25s ease;
+  &:hover { color: #ffcc66; }
 `;
 
 // Image Section
@@ -136,9 +183,10 @@ const ImageContainer = styled.div`
 `;
 
 const ProfileImage = styled.img`
-  width: 330px;
-  height: 330px;
+  width: 320px;
+  height: 320px;
   object-fit: cover;
+  object-position: 40% 20%;
   border-radius: 50%;
   border: 6px solid #2b2f55;
   box-shadow: 0 12px 28px rgba(0,0,0,0.35);
@@ -151,13 +199,15 @@ export default function Header() {
       <Nav>
         <Logo href="#top">Kiran</Logo>
         <NavLinks>
-          <NavLink href="#projects">Projects</NavLink>
+          {/* Added 'About' link and reordered */}
+          <NavLink href="#about">About</NavLink>
           <NavLink href="#experience">Experience</NavLink>
           <NavLink href="#skills">Skills</NavLink>
-          <DownloadButton href="/Kiran_Tikaraya_Resume.pdf" download>
-            Resume
-          </DownloadButton>
+          <NavLink href="#projects">Projects</NavLink>
         </NavLinks>
+        <DownloadButton href="/Kiran_Tikaraya_Resume.pdf" download>
+          Resume
+        </DownloadButton>
       </Nav>
 
       {/* Hero Section */}
@@ -171,25 +221,13 @@ export default function Header() {
             <Name>Hi, I'm Kiran Tikaraya</Name>
             <Role>Full-stack Developer | CS Undergrad @ IIEST</Role>
             <Description>
-              Currently pursuing Computer Science at IIEST Shibpur with a strong 
-              foundation in Data Structures, Algorithms, and System Design.  
-              <br /><br />
-              I’ve interned at <span style={{color:"#ffcc66", fontWeight:"600"}}>Microsoft</span>, where I 
-              engineered AI-driven testing workflows using Playwright & Model Context Protocol, 
-              boosting bug detection by 50%.  
-              <br /><br />
-              I love building impactful products — from <span style={{color:"#9fa8da"}}>AlgoWatch</span>, a Codeforces 
-              tracker for students, to scalable MERN apps like Expense Tracker.
+              Full-stack Developer with 2+ years of experience, passionate about{" "}
+              <span style={{color:"#c7c3bcff"}}>AI</span>, Problem solving, modern{" "}
+              <span style={{color:"#9fa8da"}}>frontend</span> and{" "}
+              <span style={{color:"#9fa8da"}}>backend</span> technologies.  
+              Constantly exploring new challenges and building innovative solutions.  
+              Find me on GitHub, LinkedIn, and Email where I share projects and insights.
             </Description>
-            <Buttons>
-              <PrimaryButton href="#projects">View Projects</PrimaryButton>
-              <SecondaryButton href="https://github.com/K-Tikaraya" target="_blank">
-                GitHub
-              </SecondaryButton>
-              <SecondaryButton href="https://www.linkedin.com/in/kiran-tikaraya/" target="_blank">
-                LinkedIn
-              </SecondaryButton>
-            </Buttons>
           </TextContainer>
         </motion.div>
 
@@ -199,7 +237,7 @@ export default function Header() {
           transition={{ duration: 0.8 }}
         >
           <ImageContainer>
-            <ProfileImage src="public/images/IMG_20250121_222528_146.jpg" alt="Kiran Tikaraya" />
+            <ProfileImage src="/images/IMG_20250121_222528_146.jpg" alt="Kiran Tikaraya" />
           </ImageContainer>
         </motion.div>
       </HeaderContainer>
